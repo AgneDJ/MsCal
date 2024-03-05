@@ -1,29 +1,43 @@
-"""Server for MsCal app."""
+"""Models for MsCal app."""
 
-from flask import Flask, render_template, request, flash, session, redirect
-from model import connect_to_db, db
-import requests
-import os
-import json
-import crud
-from datetime import time, date, datetime, timedelta
-import datetime as dt
-from jinja2 import StrictUndefined
-
-app = Flask(__name__)
-app.secret_key = os.environ.get("APP_SECRET_KEY", None)
-app.jinja_env.undefined = StrictUndefined
+from datetime import datetime
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+import secrets
 
 
-@app.route("/")
-def homepage():
-    """View homepage."""
-    if "user_email" in session:
-        return redirect("/profile")
+db = SQLAlchemy()
 
-    return render_template("homepage.html")
+
+class User(db.Model):
+    """A user data."""
+
+    __tablename__ = "user_data"
+
+    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_name = db.Column(db.String, nullable=False)
+    user_email = db.Column(db.String, nullable=False)
+    user_password = db.Column(db.String)
+    user_avatar = db.Column(db.String)
+
+    def __repr__(self):
+        return f"{self.user_name}"
+
+
+def connect_to_db(flask_app, db_uri="postgresql:///calendar_data", echo=True):
+    flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+    flask_app.config["SQLALCHEMY_ECHO"] = echo
+    flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    db.app = flask_app
+    db.init_app(flask_app)
+
+    print("Connected to the db!")
 
 
 if __name__ == "__main__":
+    from server import app
     connect_to_db(app)
-    app.run(host="0.0.0.0")
+
+    with app.app_context():
+        db.create_all()
