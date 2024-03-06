@@ -41,3 +41,62 @@ if __name__ == "__main__":
 
     with app.app_context():
         db.create_all()
+
+
+# A basic health profile contains
+
+# Age
+# Weight
+# Height
+# Allergies
+# Addictions
+# Period date
+# Period information
+# Sexual activity information
+# Menstrual cycle:
+
+
+#         Tracking
+
+# Days to next cycle
+# Symptoms log
+# Cycle log
+# Cycle duration
+# Weight changes
+# Activity log during cycle
+# Mood log
+
+
+#         Push Notifications for
+
+# Upcoming period
+# Daily log entries
+# Next phase of the cycle
+# Enter mood
+# Medication time
+# Ovulation
+# Fertility
+
+
+#         Suggestions and Tips
+
+# PMS
+# Medical information
+# Daily health tips
+
+
+#         Graphical representations of
+
+# Menstrual cycle
+# Fertility
+# Ovulation
+# Symptoms
+# Linking with
+
+# Women fitness trackers
+# Social media
+
+
+# cronofy api calendar
+
+#         https://app.cronofy.com/oauth/applications/65e812845f5ce44a48d306d2/authorizations/65e81319bdd1b746d82f3d11
