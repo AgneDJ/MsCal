@@ -15,12 +15,9 @@ app.secret_key = os.environ.get("APP_SECRET_KEY", None)
 app.jinja_env.undefined = StrictUndefined
 
 
-@app.route("/")
+@app.route("/homepage")
 def homepage():
     """View homepage."""
-    if "user_email" in session:
-        return redirect("/profile")
-
     return render_template("homepage.html")
 
 
