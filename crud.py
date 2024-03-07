@@ -15,3 +15,10 @@ def create_user(name, email):
                 user_password="", user_avatar="")
 
     return user
+
+
+def get_today():
+    """Retrieves today's date"""
+    today = date.today()
+
+    return today
